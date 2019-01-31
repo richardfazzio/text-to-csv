@@ -8,10 +8,6 @@ const run  = () => {
             throw new Error('Requires .txt as input');
         }
         let file = fs.readFileSync(config.file, 'utf8');
-        const csvWriter = createCsvWriter({
-            path: `${__dirname}\\${config.file.slice(0, index)}.csv`,
-            header: config.header
-        });
         const rows = file.split('\r\n'); // standard for utf8
         const records = [];
         rows.forEach(row => {
@@ -21,6 +17,14 @@ const run  = () => {
                 instance[config.header[index].id] = feature;
             });
             records.push(instance);
+        });
+        config.header.push({id: 'r10', title: 'fp-nps'})
+        records.forEach(record => {
+            record['r10'] = Number(record['r9']) < 2 ? 0 : 1;
+        });
+        const csvWriter = createCsvWriter({
+            path: `${__dirname}\\${config.file.slice(0, index)}.csv`,
+            header: config.header
         });
         csvWriter.writeRecords(records);
     } catch (err) { console.error(err); }
