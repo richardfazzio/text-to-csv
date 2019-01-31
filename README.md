@@ -7,4 +7,4 @@ There is an exmaple.txt file to help. Change the `file` in config.json to match 
 
 ## To run:
 
-In command line execute: `$npm start` to run the program.
+In command line execute: `$npm start` to run the program. The .csv should be saved under the same directory as the .txt file with the same name.
