@@ -17,9 +17,7 @@ const run  = () => {
         rows.forEach(row => {
             const features = row.split(' ');
             const instance = {};
-            features.forEach((feature, index) => {
-                instance[config.header[index].id] = feature;
-            });
+            features.forEach((feature, index) => instance[config.header[index].id] = feature);
             records.push(instance);
         });
         csvWriter.writeRecords(records);
